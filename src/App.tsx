@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter } from 'react-router-dom'
+import Router from './routes/Router';
 import './App.css';
+import { StyledEngineProvider, ThemeProvider } from '@mui/material/styles'
+import customTheme from '../src/components/Themes/CustomTheme'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StyledEngineProvider injectFirst>
+      <BrowserRouter>
+        <ThemeProvider theme={customTheme}>
+          <Router />
+        </ThemeProvider>
+      </BrowserRouter>
+    </StyledEngineProvider>
   );
 }
 
 export default App;
+// React router dom is no longer support exact property, and Switch is replaced by Routes
+// All the material component rerendered by the 'Router' component and
+// its child components will use our custom theme 

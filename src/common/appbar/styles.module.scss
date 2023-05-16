@@ -1,0 +1,42 @@
+.appBar {
+  background-color: transparent;
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    width: 100%;
+      .navLogo {
+        height: 100%;
+        background: linear-gradient(93.51deg, #9B51E0 2.84%, #3081ED 99.18%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 32px;
+      }
+    }
+      // background: linear-gradient(transparent, transparent) padding-box, linear-gradient(to right, darkblue, darkorchid) border-box;
+      .button {
+        cursor: pointer;
+        margin-left: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        padding: 8px 38px;
+        border: 1px solid #D7D7D7;
+        border-radius: 16px;
+        
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13px;
+        letter-spacing: -1px;
+        color: #FFFFFF;
+        a {
+          text-decoration: none;
+        }
+      }
+}

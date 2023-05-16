@@ -4,7 +4,8 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext"
+      "esnext",
+      "es6"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -16,11 +17,24 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    // "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    // "noImplicitAny": true,
+    // "noImplicitThis": true,
+    // "strictNullChecks": true
   },
   "include": [
-    "src"
-  ]
+    "src",
+    "routes/**/*.tsx",
+    "*.d.ts",
+  ],
+  // "resolveJsonModule": true,
+  // "esModuleInterop": true,
+  // "module": "esnext",
+  // "moduleResolution": "node",
+  // "resolveExtensions": [".js", ".jsx", ".ts", ".tsx", ".scss"]
 }
+
+// Tsconfig.ts dùng để cấu hình và tùy chỉnh các tùy chọn của cho trình biên dịch Typescript, tệp chứa json định nghĩa
+// các TypeScript compiler sẽ biên dịch mã Typescript trong project.
