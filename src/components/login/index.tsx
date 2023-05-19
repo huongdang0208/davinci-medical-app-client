@@ -3,7 +3,6 @@ import { TextField, Button, Box, Link, Grid, Typography, Snackbar, Alert, AlertC
 import PrivacyTipRoundedIcon from '@mui/icons-material/PrivacyTipRounded';
 import styles from './styles.module.scss'
 import { signInUser } from '../../api/auth';
-import { redirect } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 type PropsType = object
@@ -50,7 +49,6 @@ const LoginForm: React.FC<PropsType> = () => {
           message: "Login successfully!",
         })
         setOpenAlert(true)
-        console.log(navigate)
         navigate('/profile')
       }
     })
@@ -128,7 +126,7 @@ const LoginForm: React.FC<PropsType> = () => {
                   id="outlined-required"
                   label="Password"
                   variant="standard"
-                  value={formFields.password}
+                  type="password"
                   onChange={getFormFieldsData}
                 />
               </div>

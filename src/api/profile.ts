@@ -7,13 +7,15 @@ interface Callback {
 }
 
 interface updateProfile {
-  username: string,
-  email: string,
+  username?: string,
+  age?: number,
+  gender?: string,
+  email?: string,
   address?: string,
   contactNumber?: number
 }
 
-const baseUrl = 'http://localhost:5000'
+const baseUrl = 'http://localhost:5000/users'
 
 export const loadToken = () => {
   const token = localStorage.getItem('id token')

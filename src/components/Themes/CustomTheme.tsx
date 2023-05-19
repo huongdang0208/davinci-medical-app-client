@@ -18,6 +18,9 @@ const customTheme = createTheme({
         '&:hover .MuiOutlinedInput-root fieldset': {
           borderColor: '#603c81 !important',
         },
+        '& .MuiFormControl-root': {
+          borderBottom: '1px solid #603c81'
+        },
       },
     },
     MuiTypography: {

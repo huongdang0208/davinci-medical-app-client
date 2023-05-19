@@ -124,6 +124,7 @@ const RegisterForm: React.FC<PropsType> = () => {
                   id="outlined-required"
                   label="Password"
                   variant="standard"
+                  type="password"
                   value={formFields.password}
                   onChange={getFormFieldsData}
                 />

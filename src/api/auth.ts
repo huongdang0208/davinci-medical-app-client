@@ -72,7 +72,6 @@ export const logout = () => {
 }
 
 export const getUser = async (token: string, callback: Callback) => {
-  // const token = loadToken()
   const headers = {
     'Content-Type': 'application/json',
     'Authorization': token,
