@@ -1,9 +1,20 @@
 .container {
-    // max-width: 1200px;
-    // box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.15);
-    padding: 0;
-    // .subContainer {
-    //     background-image: url('../../../public/medical-icon.jpg');
-    //     background-repeat: no-repeat;
-    // }
+    .subContainer {
+        max-width: 1000px;
+        margin: auto;
+        margin-top: 10rem;
+        border: 1.5px solid #603c81;
+        border-radius: 1rem;
+        .title {
+            text-align: center;
+        }
+        .formContainer {
+            margin-top: 2rem;
+            // width: 65%;
+            .inputContainer {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
 }
