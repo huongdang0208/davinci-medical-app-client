@@ -1,7 +1,7 @@
 import { User } from './user'
 
 export const validateRegister = (user: User) => {
-  if (!user.email || !user.username || !user.password) {
+  if (!user.email || !user.password) {
     return false
   }
   return true

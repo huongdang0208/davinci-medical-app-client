@@ -3,23 +3,23 @@ import { createTheme } from '@material-ui/core/styles'
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: '#603c81',
+      main: '#FF6900 ',
     },
   },
   typography: {
-    fontFamily: 'Segoe UI, Roboto, Ubuntu'
+    fontFamily: 'system-ui'
   },
   overrides: {
     MuiTextField: {
       root: {
         '& .MuiOutlinedInput-root fieldset': {
-          borderColor: '#603c81 !important',
+          borderColor: '#FF6900 !important',
         },
         '&:hover .MuiOutlinedInput-root fieldset': {
-          borderColor: '#603c81 !important',
+          borderColor: '#FF6900 !important',
         },
         '& .MuiFormControl-root': {
-          borderBottom: '1px solid #603c81'
+          borderBottom: '1px solid #FF6900'
         },
       },
     },

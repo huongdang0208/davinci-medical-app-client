@@ -1,41 +1,12 @@
 .homePage {
-  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.15);
-  margin: 0 auto;
-  padding: 0 80px;
-  position: relative;
-  // max-width: 1100px;
-  
-  overflow-y: auto;
-  overflow-x: hidden;
-  background-color: #1F1D2B;
-  &::before {
-    content: "";
-    position: absolute;
-    width: 123px;
-    height: 123px;
-    left: 45%;
-    top: 138px;
-    filter: blur(90px);
-    background-color: #FB37FF;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    width: 123px;
-    height: 123px;
-    left: 80%;
-    top: 550px;
-    background-color: #18B2DE;
-    filter: blur(80px);
-  }
+  background-image: url('../../images/medical-background-img.jpg');
+  background-size: cover;
   .container {
       max-width: 1200px;
       padding: 0;
-      // .subContainer {
-      //     background-image: url('../../../public/medical-icon.jpg');
-      //     background-repeat: no-repeat;
-      // }
       .infoBox {
+        position: relative;
+        z-index: 1;
         animation-duration: 0.8s;
         max-height: 500px;
         max-width: 90%;
@@ -44,17 +15,15 @@
         padding: 3rem;
         .infoBoxBoldText {
           margin: 0;
-          font-family: Poppins;
           color: #FFFFFF;
           font-size: 65px;
-          font-weight: 600;
+          line-height: 6rem;
           line-height: 60px;
           letter-spacing: -2px;
           text-align: center;
         }
         .infoBoxSlimText {
           margin: 24px 0;
-          font-family: Poppins;
           color: #FFFFFF;
           font-size: 16px;
           font-weight: 400;
@@ -62,104 +31,58 @@
           letter-spacing: 0.5px;
           text-align: center;
         }
-        .infoBoxBtnGroup {
-          display: flex;
-          justify-content: center;
-          .exploreBtn {
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 38px;
-            border-radius: 16px;
+        // .infoBoxBtnGroup {
+        //   display: flex;
+        //   justify-content: center;
+        //   .exploreBtn {
+        //     cursor: pointer;
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     padding: 8px 38px;
+        //     border-radius: 16px;
             
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: -1px;
-            color: #FFFFFF;
-            border: none;
-            background: linear-gradient(103.91deg, #9B51E0 21.01%, rgba(48, 129, 237, 0.8) 100%);
-          }
-          .aboutUsBtn {
-            cursor: pointer;
-            margin-left: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: transparent;
-            padding: 8px 38px;
-            border: 1px solid #D7D7D7;
-            border-radius: 16px;
+        //     font-style: normal;
+        //     font-weight: 600;
+        //     font-size: 13px;
+        //     letter-spacing: -1px;
+        //     color: #FFFFFF;
+        //     border: none;
+        //     background: linear-gradient(103.91deg, #9B51E0 21.01%, rgba(48, 129, 237, 0.8) 100%);
+        //   }
+        //   .aboutUsBtn {
+        //     cursor: pointer;
+        //     margin-left: 20px;
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        //     background-color: transparent;
+        //     padding: 8px 38px;
+        //     border: 1px solid #D7D7D7;
+        //     border-radius: 16px;
             
-            font-family: 'Poppins';
-            font-style: normal;
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: -1px;
-            color: #FFFFFF;
-          }
-        }
+        //     font-style: normal;
+        //     font-weight: 600;
+        //     font-size: 13px;
+        //     letter-spacing: -1px;
+        //     color: #FFFFFF;
+        //   }
+        // }
       }
 
-      .started {
-        margin-top: 100px;
-        display: flex;
-        flex-direction: column;
-        .startedTextBold {
-          margin: 0;
-          align-self: center;
-          font-family: "Poppins";
-          font-style: normal;
-          color: #FFFFFF;
-          font-weight: 500;
-          font-size: 40px;
-          line-height: 72px;
-        }
-        .startedItems {
-          padding: 60px 80px;
-          position: relative;
-          display: grid;
-          grid-template-columns: auto auto auto auto;
-          grid-column-gap: 20px;
-          grid-row-gap: 20px;
-          justify-content: space-between;
-          &:before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100px;
-            top: 80px;
-            filter: blur(80px);
-            background: linear-gradient(93.51deg, #9B51E0 2.84%, #3081ED 99.18%);
-          }
-          .itemWrapper {
-            .instructionText {
-              width: 100px;
-              margin: 0;
-              margin-top: 10px;
-              text-align: center;
-              font-family: 'Poppins';
-              font-style: normal;
-              font-weight: 400;
-              font-size: 12px;
-              color: #FFFFFF;
-            }
-            .startedItem {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 100px;
-              height: 100px;
-              border-radius: 18px;
-              background-color: red;
-              background: rgba(255, 255, 255, 0.095);
-              box-shadow: inset 2.01px -2.01px 20px rgba(214, 214, 214, 0.17), inset -3.01333px 3.01333px 3.01333px rgba(255, 255, 255, 0.39);
-              backdrop-filter: blur(74.4293px);
-            }
-          }
-        }
-      }
   }
+}
+.homePage {
+  position: relative;
+}
+
+.homePage::after {
+  -webkit-backdrop-filter: blur(5px); /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
+  backdrop-filter: blur(5px); /* Supported in Chrome 76 */
+
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0;
 }

@@ -1,10 +1,13 @@
 export interface User {
-    _id?: string,
-    username: string,
+    userId?: string,
+    email: string,
+    password: string,
+    cccd?: string,
+    name?: string,
     age?: number,
     gender?: string,
-    email: string,
     address?: string,
-    contactNumber?: number,
-    password: string,
+    contactNumber?: string,
+    note?: string,
+    plan?: string,
 }

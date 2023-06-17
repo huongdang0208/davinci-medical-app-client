@@ -1,22 +1,35 @@
 import React, { useState } from 'react'
-import { TextField, Button, Link, Box, FormGroup, FormControlLabel, Checkbox, Alert, Grid, Typography } from '@mui/material'
-import type { AlertColor } from '@mui/material'
+import { TextField, Button, Link, Box, FormGroup, FormControlLabel, Checkbox, Alert, Grid, Typography, Snackbar } from '@mui/material'
+// import type { AlertColor } from '@mui/material'
 import PrivacyTipRoundedIcon from '@mui/icons-material/PrivacyTipRounded';
 import styles from './styles.module.scss'
 import { registerUser } from '../../api/auth';
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 type PropsType = object
 
 const RegisterForm: React.FC<PropsType> = () => {
+  const navigate = useNavigate();
   const [formFields, setFormFields] = useState({
-    username: "",
     email: "",
-    password: ""
+    password: "",
+    confirmPassword: "",
   })
-  const [isAlert, setIsAlert] = useState<AlertColor>()
-  const [alertMessage, setAlertMessage] = useState<string>()
+  const [alert, setAlert] = useState({
+    // severity: "",
+    message: ""
+  })
+
+  const [openAlert, setOpenAlert] = useState(false)
+
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpenAlert(false);
+  }
 
   const getFormFieldsData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fieldValue = e.target.value
@@ -26,18 +39,24 @@ const RegisterForm: React.FC<PropsType> = () => {
   const handleRegister = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault()
     const newUser = {
-      username: formFields.username,
       email: formFields.email,
       password: formFields.password,
+      confirmPassword: formFields.confirmPassword
     }
     registerUser(newUser, (data, err) => {
       if (data) {
-        setIsAlert('success')
-        setAlertMessage('Registered successfully!')
-        redirect('/')
+        setAlert({
+          // severity: "success",
+          message: "Login successfully!",
+        })
+        setOpenAlert(true)
+        navigate('/profile')
       } else {
-        setIsAlert('error')
-        setAlertMessage(err?.toString())
+        setAlert({
+          // severity: "error",
+          message: err as string,
+        })
+        setOpenAlert(true)
       }
     })
   }
@@ -54,7 +73,11 @@ const RegisterForm: React.FC<PropsType> = () => {
 
     return (
       <Grid container sx={styledGrid}>
-        {isAlert && <Alert severity={isAlert}>{alertMessage}</Alert>}
+        <Snackbar open={openAlert} autoHideDuration={60000000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
+          <Alert onClose={handleClose} sx={{ width: '100%' }}>
+            {alert.message}
+          </Alert>
+        </Snackbar>
         <Grid item xs={6} className={styles.wrapperBackground}>
           <img src='/assets/doctor.png' alt='davinci' />
           <Typography variant="h6" className={styles.navLogo}>
@@ -92,40 +115,42 @@ const RegisterForm: React.FC<PropsType> = () => {
               autoComplete="off"
             >
               <div className="info-wrapper">
-                <div className="username">
-                  <TextField
-                    name="username"
-                    variant="standard"
-                    required id="outlined-required"
-                    label="User name"
-                    autoComplete='off'
-                    value={formFields.username}
-                    onChange={getFormFieldsData}
-                  />
-                </div>
-              </div>
-              <div className="info-wrapper">
                 <TextField
                   name="email"
                   variant="standard"
                   className="full"
                   required
                   id="outlined-required"
-                  label="Email Address"
+                  label="Email"
+                  type="email"
                   value={formFields.email}
                   onChange={getFormFieldsData}
                 />
               </div>
+
               <div className="info-wrapper">
                 <TextField
                   name="password"
                   className="full"
                   required
                   id="outlined-required"
-                  label="Password"
+                  label="Mật khẩu"
                   variant="standard"
                   type="password"
                   value={formFields.password}
+                  onChange={getFormFieldsData}
+                />
+              </div>
+              <div className="info-wrapper">
+                <TextField
+                  name="confirmPassword"
+                  className="full"
+                  required
+                  id="outlined-required"
+                  label="Nhập lại mật khẩu"
+                  variant="standard"
+                  type="password"
+                  value={formFields.confirmPassword}
                   onChange={getFormFieldsData}
                 />
               </div>
@@ -140,6 +165,9 @@ const RegisterForm: React.FC<PropsType> = () => {
             <Button className={styles.btn} variant="contained" onClick={(e) => handleRegister(e)}>
               Sign Up
             </Button>
+            <div className="link-wrapper">
+              <div className="g-signin2" data-onsuccess="onSignIn"></div>
+            </div>
             <div className="link-wrapper">
               <Link href="/dang-nhap" underline="always" className="anchor link-SignIn">
                 Already have an account? Sign in

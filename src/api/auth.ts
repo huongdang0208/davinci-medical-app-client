@@ -9,6 +9,12 @@ interface Callback {
 
 const baseUrl = 'http://localhost:5000'
 
+export const storeUserData = (token: string, user: User) => {
+  localStorage.setItem('id token', token)
+  // need to convert user data to string because localStorage only store string not object
+  localStorage.setItem('user: ', JSON.stringify(user))
+}
+
 export const registerUser = async (user: User, callback: Callback) => {
 
   if (!validateRegister(user)) {
@@ -16,25 +22,16 @@ export const registerUser = async (user: User, callback: Callback) => {
   } else if (!validateEmail(user.email)) {
     callback(undefined, 'Email không hợp lệ!')
   } else {
-    // const config = {
-    //   method: 'post',
-    //   url: `${baseUrl}/users/register`,
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   auth: {
-    //     username: user.username,
-    //     email: user.email,
-    //     password: user.password
-    //   }
-    // }
     const headers = {
       'Content-Type': 'application/json'
     } as AxiosRequestHeaders
     try {
-      const response = await axios.post(`${baseUrl}/users/register`, user, { headers: headers})
-      if (response.data) {
+      const response = await axios.post(`${baseUrl}/api/account/register`, user, { headers: headers})
+      if (response.data.success) {
         callback(response.data, undefined)
+        storeUserData(response.data.token, response.data.user)
+      } else {
+        callback(undefined, response.data.message)
       }
     } catch (error) {
       callback(undefined, 'Đăng kí không thành công')
@@ -42,28 +39,26 @@ export const registerUser = async (user: User, callback: Callback) => {
   }
 }
 
-export const storeUserData = (token: string, user: User) => {
-  localStorage.setItem('id token', token)
-  // need to convert user data to string because localStorage only store string not object
-  localStorage.setItem('user: ', JSON.stringify(user))
-}
 
-export const signInUser = async (username: string, password: string, callback: Callback) => {
+export const signInUser = async (email: string, password: string, callback: Callback) => {
   const user = {
-    username,
+    email,
     password
   }
   const headers = {
     'Content-Type': 'application/json'
   } as AxiosRequestHeaders
   try {
-    const response = await axios.post(`${baseUrl}/users/authenticate`, user, { headers: headers})
-    if (response.data) {
+    const response = await axios.post(`${baseUrl}/api/account/authenticate`, user, { headers: headers})
+    if (response.data.success) {
+      console.log(response)
       callback(response.data, undefined)
       storeUserData(response.data.token, response.data.user)
+    } else {
+      callback(undefined, 'Sai mật khẩu')
     }
   } catch (error) {
-    callback(undefined, 'Cannot find the user')
+    callback(undefined, 'Không tìm thấy người dùng')
   }
 }
 
@@ -77,12 +72,28 @@ export const getUser = async (token: string, callback: Callback) => {
     'Authorization': token,
   } as AxiosRequestHeaders
   try {
-    const response = await axios.get(`${baseUrl}/users/user`, { headers: headers })
+    const response = await axios.get(`${baseUrl}/api/user/user`, { headers: headers })
     if (response.data) {
       callback(response.data.user, undefined)
     }
   } catch (error) {
     callback(undefined, 'Error')
+  }
+}
+
+export const googleAuthenticate = async (callback: Callback) => {
+  try {
+    const headers = {
+      'Content-Type': 'application/json',
+    } as AxiosRequestHeaders
+
+    const res = await axios.get(`${baseUrl}/api/auth/google`, { headers: headers, withCredentials: true })
+    if (res.data) {
+      console.log(res.data)
+      callback(res.data, undefined)
+    }
+  } catch (err) {
+    callback(undefined, 'Lỗi xác thực')
   }
 }
 
