@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
-import { TextField, Button, Box, Link, Grid, Typography, Snackbar, Alert, AlertColor } from '@mui/material'
+import { TextField, Button, Box, Link, Grid, Typography, Snackbar, Alert } from '@mui/material'
 import PrivacyTipRoundedIcon from '@mui/icons-material/PrivacyTipRounded';
 import styles from './styles.module.scss'
-import { signInUser } from '../../api/auth';
+import { signInUser, googleAuthenticate } from '../../api/auth';
 import { useNavigate } from 'react-router-dom';
+
+import Google from '../../images/Icon/Google.png'
 
 type PropsType = object
 
 const LoginForm: React.FC<PropsType> = () => {
   const navigate = useNavigate();
   const [formFields, setFormFields] = useState({
-    username: '',
+    email: '',
     password: ''
   })
   const [alert, setAlert] = useState({
-    severity: "",
+    // severity: "",
     message: ""
   })
 
@@ -36,16 +38,16 @@ const LoginForm: React.FC<PropsType> = () => {
 
   const handleSignIn = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault()
-    signInUser(formFields.username, formFields.password, (data, err) => {
+    signInUser(formFields.email, formFields.password, (data, err) => {
       if (err) {
         setAlert({
-          severity: "error",
+          // severity: "error",
           message: err as string,
         })
         setOpenAlert(true)
       } else {
         setAlert({
-          severity: "success",
+          // severity: "success",
           message: "Login successfully!",
         })
         setOpenAlert(true)
@@ -53,6 +55,31 @@ const LoginForm: React.FC<PropsType> = () => {
       }
     })
   }
+
+  const google = () => {
+    // Open the Google authentication URL in a new window
+    const authWindow = window.open("http://localhost:5000/api/auth/google", "_self");
+  
+    // Poll for changes in the new window's URL
+    const interval = setInterval(() => {
+      if (authWindow?.closed) {
+        // Stop polling if the authentication window is closed
+        clearInterval(interval);
+        // Extract the token from cookies
+        const cookies = document.cookie.split(';');
+        let jwtToken = '';
+        
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith('jwt=')) {
+            jwtToken = cookie.substring(4);
+            console.log(jwtToken);
+            break;
+          }
+        }
+      }
+    }, 1000); // Adjust the interval as needed
+  };
   const styledGrid = { 
     maxWidth: '1000px',
     boxShadow: '0px 10px 50px #603c81',
@@ -62,11 +89,12 @@ const LoginForm: React.FC<PropsType> = () => {
     border: '1.5px solid #603c81',
     borderRadius:' 1rem',
   }
+
   return (
     <React.Fragment>
       <Grid container sx={styledGrid}>
         <Snackbar open={openAlert} autoHideDuration={60000000} onClose={handleClose} anchorOrigin={{ vertical: "top", horizontal: "center" }}>
-          <Alert onClose={handleClose} severity={alert.severity as AlertColor} sx={{ width: '100%' }}>
+          <Alert onClose={handleClose} sx={{ width: '100%' }}>
             {alert.message}
           </Alert>
         </Snackbar>
@@ -107,13 +135,14 @@ const LoginForm: React.FC<PropsType> = () => {
               autoComplete="off"
             >
               <div className="info-wrapper">
-                <div className="username">
+                <div className="email">
                   <TextField
-                    name="username"
+                    name="email"
                     variant="standard"
                     required id="outlined-required"
-                    label="User name"
-                    value={formFields.username}
+                    label="Email"
+                    type="email"
+                    value={formFields.email}
                     onChange={getFormFieldsData}
                     />
                 </div>
@@ -134,6 +163,10 @@ const LoginForm: React.FC<PropsType> = () => {
             <Button className={styles.btn} variant="contained" onClick={(e) => {handleSignIn(e)}}>
               Sign In
             </Button>
+            <div className={`${styles.logginButton} ${styles.google}`} onClick={google}>
+                <img src={Google} alt="" className="icon" />
+                Google
+            </div>
             <div className="link-wrapper">
               <Link href="/dang-ki" underline="always" className="anchor link-SignIn">
                 Already have an account? Sign up

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Avatar, Box, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { User } from '../../services/user'
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import AssignmentIcon from '@mui/icons-material/Assignment';
@@ -9,10 +10,12 @@ import styles from './styles.module.scss'
 
 type PropsType = {
   user: User | undefined,
+  openDrawer: boolean,
+  setOpenDrawer: (data: boolean) => void
 }
 
-const Sidebar: React.FC<PropsType> = ( { user }) => {
-  const [openDrawer, setOpenDrawer] = useState(true)
+const Sidebar: React.FC<PropsType> = ( { user, openDrawer, setOpenDrawer }) => {
+  // const [openDrawer, setOpenDrawer] = useState(true)
   const listSideBar = [
     {
       key: 0,
@@ -37,10 +40,20 @@ const Sidebar: React.FC<PropsType> = ( { user }) => {
   const handleHideDrawer = () => {
     setOpenDrawer(false)
   }
+  const handleOpenDrawer = () => {
+    setOpenDrawer(true)
+  }
   return (
     <React.Fragment>
-      <ArrowBackIosIcon onClick={() => handleHideDrawer()} style={{ position: 'fixed', right: '0' }} />
-      <Drawer anchor="left" open={openDrawer} variant="persistent">
+      <Avatar className={styles.toggleDrawer} sx={{ bgcolor: "#ba68c8" }}>
+        {openDrawer ? <ArrowBackIosIcon onClick={() => handleHideDrawer()} className={styles.iconToggleScreen} /> : <ArrowForwardIosIcon onClick={() => handleOpenDrawer()} className={styles.iconToggleScreen} />}
+      </Avatar>
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        variant="persistent"
+        className={styles.drawerContainer}
+      >
         <Box className={styles.container}>
           <List>
             <Grid className={styles.avatarContainer}>
@@ -49,7 +62,7 @@ const Sidebar: React.FC<PropsType> = ( { user }) => {
                 src="/assets/avatar.jpg"
                 sx={{ width: 80, height: 80 }}
               />
-              <Typography className={styles.username}>{user?.username}</Typography>
+              <Typography className={styles.username}>{user?.email}</Typography>
             </Grid>
             <Divider className={styles.divider} />
             {listSideBar?.map((item) => (
@@ -70,4 +83,3 @@ const Sidebar: React.FC<PropsType> = ( { user }) => {
 }
 
 export default Sidebar
-//https://stackoverflow.com/questions/52396360/how-to-hide-material-ui-mini-variant-drawer-on-mobile-view

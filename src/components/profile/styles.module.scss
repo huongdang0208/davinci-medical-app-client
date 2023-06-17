@@ -10,11 +10,53 @@
         }
         .formContainer {
             margin-top: 2rem;
-            // width: 65%;
+            display: flex;
+            justify-content: center;
             .inputContainer {
                 display: flex;
                 justify-content: center;
+                .warningText {
+                    display: inline-flex;
+                }
             }
         }
+        .btnContainer {
+            display: flex;
+            justify-content: center;
+            .saveBtn {
+                width: 10rem;
+                margin: 1.5rem;
+                font-weight: bold;
+                cursor: pointer;
+                padding: 8px 38px;
+                border-radius: 16px;
+                font-size: 13px;
+                letter-spacing: -1px;
+                color: #FFFFFF;
+                border: none;
+                background: linear-gradient(103.91deg, #452562 21.01%, rgb(45 92 155 / 80%) 100%);
+            }
+        }
+    }
+}
+.modalBox {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    background-color: #ffff;
+    width: 40rem;
+    height: 40rem;
+    .titleModal {
+        text-align: center;
+    }
+    .formContainer {
+        padding: 3rem;
+        .inputContainer {
+            margin: 1rem
+        }
+    }
+    .btnGroup {
+        display: flex;
+        justify-content: center;
     }
 }

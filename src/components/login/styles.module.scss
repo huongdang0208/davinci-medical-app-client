@@ -28,6 +28,21 @@
         font-size: 0.75rem;
         margin-top: 1rem;
     }
+    .loginButton{
+      width: 150px;
+      padding: 15px 25px;
+      border-radius: 5px;
+      color: white;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+      cursor: pointer;
+    }
+    
+    .google{
+      background-color: #df4930;
+    }
 }
 
 .wrapperBackground {
@@ -69,7 +84,6 @@
     background: linear-gradient(93.51deg, #9B51E0 2.84%, #3081ED 99.18%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 32px;

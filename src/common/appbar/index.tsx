@@ -1,28 +1,37 @@
 import { CssBaseline, GlobalStyles, Link, Toolbar, AppBar, Typography, Button } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../api/auth';
+import { User } from '../../services/user';
 import styles from './styles.module.scss'
 
 type PropsType = object
 
 const TopBar: React.FC<PropsType> = () => {
-  const styledText = {
-    // '&:hover': { border: 'none' },
-    fontFamily: 'Poppins',
-    fontStyle: 'normal',
-    fontWeight: '500',
-    fontSize: '12px',
-    color: '#BCBCBC',
-    // '&.'selectedlink {
-    //   background: 'linear-gradient(93.51deg, #9B51E0 2.84%, #3081ED 99.18%)',
-    //   -webkit-background-clip: text;
-    //   -webkit-text-fill-color: transparent;
-    //   border-bottom: 1.5px solid #9B51E0;
-    // }
-    '&:not(:last-child)': {
-      marginRight: '32px',
-    }
-  }
+  const navigate = useNavigate();
+  const token = localStorage.getItem('id token')
+  const [user, setUser] = useState<User>()
 
+  useEffect(() => {
+    if (token ) {
+      getUser(token, (data, error) => {
+        if (data) {
+          setUser(data)
+        }
+        if (error) {
+          console.log(error)
+        }
+      })
+      return
+    }
+    navigate('/dang-nhap')
+
+  }, [token])
+
+  const handleLogout = () => {
+    localStorage.removeItem('id token');
+  }
+  console.log('user', user)
   return (
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
@@ -40,36 +49,48 @@ const TopBar: React.FC<PropsType> = () => {
           </Typography>
           <nav className={styles.navLinkWrap}>
             <Link
-              variant="button"
+              // variant="button"
               color="text.primary"
               href="#"
-              sx={styledText}
+              className={styles.textLink}
             >
-              Features
+              Sản phẩm
             </Link>
             <Link
-              variant="button"
               color="text.primary"
               href="#"
-              sx={styledText}
+              className={styles.textLink}
             >
-              Enterprise
+              Diễn đàn
             </Link>
             <Link
-              variant="button"
               color="text.primary"
               href="#"
-              sx={styledText}
+              className={styles.textLink}
             >
-              Support
+              Gói cước
+            </Link>
+            <Link
+              color="text.primary"
+              href="#"
+              className={styles.textLink}
+            >
+              Đăng ký Partner
             </Link>
           </nav>
-          <div>
-            <Button className={styles.button}>
-              <a href="/dang-nhap">
-                Login
-              </a>
+          <div className={styles.btnContainer}>
+            <Button className={styles.signUpBtn} onClick={() => navigate('/dang-ki')}>
+              Đăng kí
             </Button>
+            {user ? (
+              <Button className={styles.signInBtn} onClick={() => handleLogout()}>
+                Đăng xuất
+              </Button>
+              ) : (
+                <Button className={styles.signInBtn} onClick={() => navigate('/dang-nhap')}>
+                  Đăng nhập
+                </Button>
+              )}
           </div>
         </Toolbar>
       </AppBar>
