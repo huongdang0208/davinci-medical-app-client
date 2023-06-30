@@ -3,29 +3,32 @@ import { createTheme } from '@material-ui/core/styles'
 const customTheme = createTheme({
   palette: {
     primary: {
-      main: '#FF6900 ',
+      main: '#603c81 ',
     },
   },
   typography: {
-    fontFamily: 'system-ui'
+    fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif'
   },
   overrides: {
     MuiTextField: {
       root: {
         '& .MuiOutlinedInput-root fieldset': {
-          borderColor: '#FF6900 !important',
+          borderColor: '#603c81 !important',
+          border: '1px solid #603c81'
         },
         '&:hover .MuiOutlinedInput-root fieldset': {
-          borderColor: '#FF6900 !important',
+          borderColor: '#603c81 !important',
+          border: '1px solid #603c81'
         },
         '& .MuiFormControl-root': {
-          borderBottom: '1px solid #FF6900'
+          borderBottom: '1px solid #603c81',
+          border: '1px solid #603c81'
         },
       },
     },
     MuiTypography: {
       root: {
-        
+        fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif'
       }
     },
     MuiDivider: {

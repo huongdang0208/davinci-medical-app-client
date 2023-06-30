@@ -88,6 +88,7 @@ const LoginForm: React.FC<PropsType> = () => {
     marginTop: '5rem',
     border: '1.5px solid #603c81',
     borderRadius:' 1rem',
+    backgroundColor: '#ffff'
   }
 
   return (

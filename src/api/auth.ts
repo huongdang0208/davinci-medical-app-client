@@ -1,7 +1,7 @@
 import axios, { AxiosRequestHeaders } from 'axios'
 import { User } from '../services/user';
 import { validateEmail, validateRegister } from '../services/validate';
-// import { loadToken } from './profile';
+import { REGISTER_URL, AUTHENTICATE_URL } from '../constant/auth-api';
 
 interface Callback {
   (data: User | undefined, err: Error | string | undefined): void
@@ -26,7 +26,7 @@ export const registerUser = async (user: User, callback: Callback) => {
       'Content-Type': 'application/json'
     } as AxiosRequestHeaders
     try {
-      const response = await axios.post(`${baseUrl}/api/account/register`, user, { headers: headers})
+      const response = await axios.post(REGISTER_URL, user, { headers: headers})
       if (response.data.success) {
         callback(response.data, undefined)
         storeUserData(response.data.token, response.data.user)
@@ -49,7 +49,7 @@ export const signInUser = async (email: string, password: string, callback: Call
     'Content-Type': 'application/json'
   } as AxiosRequestHeaders
   try {
-    const response = await axios.post(`${baseUrl}/api/account/authenticate`, user, { headers: headers})
+    const response = await axios.post(AUTHENTICATE_URL, user, { headers: headers})
     if (response.data.success) {
       console.log(response)
       callback(response.data, undefined)

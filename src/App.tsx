@@ -7,13 +7,15 @@ import customTheme from '../src/components/Themes/CustomTheme'
 
 function App() {
   return (
+  <div className='App'>
     <StyledEngineProvider injectFirst>
       <BrowserRouter>
         <ThemeProvider theme={customTheme}>
-          <Router />
+            <Router />
         </ThemeProvider>
       </BrowserRouter>
     </StyledEngineProvider>
+  </div>
   );
 }
 

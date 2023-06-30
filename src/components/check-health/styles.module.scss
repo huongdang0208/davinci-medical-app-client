@@ -1,6 +1,6 @@
 
 .container {
-    margin-top: 5rem;
+    // margin-top: 5rem;
     .zoomInChart {
         width: 2500px;
         height: 100vh;
@@ -9,4 +9,13 @@
         width: 2000px;
         height: 100vh
     }
+}
+.styleItemGrid {
+    background-color: aliceblue;
+    box-shadow: 0px 10px 30px -15px rgba(0, 0, 0, 0.3);
+    border-radius: 1rem;
+    margin: 2rem;
+    min-height: 94vh;
+    padding: 2rem;
+    width: -webkit-fill-available;
 }

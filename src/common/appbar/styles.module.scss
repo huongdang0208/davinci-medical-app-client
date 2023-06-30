@@ -13,30 +13,6 @@
     width: 10rem;
     height: 3rem;
   }
-  background-color: transparent;
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-    // width: 1200px;
-    margin: auto;
-    .textLink {
-      text-decoration: none;
-      font-family: 'system-ui';
-      text-transform: none;
-      margin-left: 5rem;
-      font-size: 1.25rem;
-    }
-      .navLogo {
-        height: 100%;
-        color: #FF6900;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 32px;
-        margin-right: 5rem;
-      }
-    }
     .btnContainer {
       margin-left: 10rem;
       display: flex;

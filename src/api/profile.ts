@@ -1,6 +1,7 @@
 
 import axios, { AxiosRequestHeaders } from 'axios'
 import { User } from '../services/user';
+import { UPDATE_USER, CREATE_USER } from '../constant/auth-api';
 
 interface Callback {
 (data: User | undefined, err: Error | string | undefined): void
@@ -15,7 +16,6 @@ interface IUpdateProfile {
   contactNumber?: string
 }
 
-const baseUrl = 'http://localhost:5000/api/user'
 
 export const loadToken = () => {
   const token = localStorage.getItem('id token')
@@ -29,7 +29,7 @@ export const updateProfile = async (email: string, params: IUpdateProfile, callb
     'Authorization': token,
   } as AxiosRequestHeaders
   try {
-    const response = await axios.put(`${baseUrl}/update`, params, { headers: headers })
+    const response = await axios.put(UPDATE_USER, params, { headers: headers })
     if (response.data.success) {
       callback(response.data, undefined)
     } else {
@@ -48,7 +48,7 @@ export const addMember = async(user: User, fieldInfo: IUpdateProfile, callback: 
     'Authorization': token,
   } as AxiosRequestHeaders
   try {
-    const response = await axios.put(`${baseUrl}/create/member`, params, { headers: headers })
+    const response = await axios.put(CREATE_USER, params, { headers: headers })
     if (response.data.success) {
       callback(response.data, undefined)
     } else {
